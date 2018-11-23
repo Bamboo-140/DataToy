@@ -1,0 +1,7 @@
+﻿namespace DataTool
+{
+}
+
+namespace DataTool
+{
+}
