@@ -3,7 +3,7 @@
   <asmv1:assemblyIdentity name="DataToy.exe" version="1.0.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="DataToy" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="DataToy" version="1.0.0.4" language="neutral" processorArchitecture="msil" />
     <commandLine file="DataToy.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -52,13 +52,13 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DataToy.exe" size="83880">
-      <assemblyIdentity name="DataToy" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <assemblyIdentity name="DataToy" version="1.0.0.4" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>5vYxNhu4maX6GnyGO1t59MUwVLY=</dsig:DigestValue>
+        <dsig:DigestValue>Qtzl15cYQ3U7/yaIlc2cy7Ceq44=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

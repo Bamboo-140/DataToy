@@ -81,7 +81,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 34);
+            this.label1.Location = new System.Drawing.Point(12, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 12);
             this.label1.TabIndex = 5;
@@ -90,7 +90,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(321, 34);
+            this.label2.Location = new System.Drawing.Point(321, 15);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 12);
             this.label2.TabIndex = 6;
@@ -101,7 +101,7 @@
             this.cmb_CurrentDatabase.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmb_CurrentDatabase.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_CurrentDatabase.FormattingEnabled = true;
-            this.cmb_CurrentDatabase.Location = new System.Drawing.Point(95, 30);
+            this.cmb_CurrentDatabase.Location = new System.Drawing.Point(95, 11);
             this.cmb_CurrentDatabase.Name = "cmb_CurrentDatabase";
             this.cmb_CurrentDatabase.Size = new System.Drawing.Size(164, 20);
             this.cmb_CurrentDatabase.TabIndex = 9;
@@ -111,7 +111,7 @@
             this.cmb_SourceDatabase.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmb_SourceDatabase.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_SourceDatabase.FormattingEnabled = true;
-            this.cmb_SourceDatabase.Location = new System.Drawing.Point(389, 30);
+            this.cmb_SourceDatabase.Location = new System.Drawing.Point(389, 11);
             this.cmb_SourceDatabase.Name = "cmb_SourceDatabase";
             this.cmb_SourceDatabase.Size = new System.Drawing.Size(164, 20);
             this.cmb_SourceDatabase.TabIndex = 10;
@@ -137,10 +137,10 @@
             this.columnnameDataGridViewTextBoxColumn,
             this.datatypeDataGridViewTextBoxColumn});
             this.dgv_ShowResult.DataSource = this.bds_ResultDisplay;
-            this.dgv_ShowResult.Location = new System.Drawing.Point(14, 72);
+            this.dgv_ShowResult.Location = new System.Drawing.Point(14, 55);
             this.dgv_ShowResult.Name = "dgv_ShowResult";
             this.dgv_ShowResult.RowTemplate.Height = 23;
-            this.dgv_ShowResult.Size = new System.Drawing.Size(539, 257);
+            this.dgv_ShowResult.Size = new System.Drawing.Size(539, 274);
             this.dgv_ShowResult.TabIndex = 12;
             this.dgv_ShowResult.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_ShowResult_CellMouseDown);
             // 
@@ -188,7 +188,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 55);
+            this.label3.Location = new System.Drawing.Point(12, 35);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 13;
@@ -198,7 +198,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(71, 55);
+            this.label4.Location = new System.Drawing.Point(71, 35);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(0, 12);
             this.label4.TabIndex = 15;
@@ -223,7 +223,7 @@
             // 
             // btn_Exchange
             // 
-            this.btn_Exchange.Location = new System.Drawing.Point(275, 30);
+            this.btn_Exchange.Location = new System.Drawing.Point(275, 11);
             this.btn_Exchange.Name = "btn_Exchange";
             this.btn_Exchange.Size = new System.Drawing.Size(31, 23);
             this.btn_Exchange.TabIndex = 18;
@@ -338,12 +338,14 @@
             this.menuStrip1.Size = new System.Drawing.Size(568, 25);
             this.menuStrip1.TabIndex = 25;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.Visible = false;
             // 
             // menu_about
             // 
             this.menu_about.Name = "menu_about";
             this.menu_about.Size = new System.Drawing.Size(60, 21);
             this.menu_about.Text = "关于(&A)";
+            this.menu_about.Visible = false;
             this.menu_about.Click += new System.EventHandler(this.menu_about_Click);
             // 
             // btn_EachRepair
