@@ -57,14 +57,11 @@
             this.lab_SelectedAll = new System.Windows.Forms.Label();
             this.lab_SelectNone = new System.Windows.Forms.Label();
             this.btn_ExportSQL = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.menu_about = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_EachRepair = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ShowResult)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bds_ResultDisplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xsD_ResultDisplay1)).BeginInit();
             this.statusStrip1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_Fix
@@ -142,7 +139,6 @@
             this.dgv_ShowResult.RowTemplate.Height = 23;
             this.dgv_ShowResult.Size = new System.Drawing.Size(539, 274);
             this.dgv_ShowResult.TabIndex = 12;
-            this.dgv_ShowResult.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_ShowResult_CellMouseDown);
             // 
             // Choose
             // 
@@ -329,25 +325,6 @@
             this.btn_ExportSQL.UseVisualStyleBackColor = true;
             this.btn_ExportSQL.Click += new System.EventHandler(this.btn_ExportSQL_Click);
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menu_about});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(568, 25);
-            this.menuStrip1.TabIndex = 25;
-            this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.Visible = false;
-            // 
-            // menu_about
-            // 
-            this.menu_about.Name = "menu_about";
-            this.menu_about.Size = new System.Drawing.Size(60, 21);
-            this.menu_about.Text = "关于(&A)";
-            this.menu_about.Visible = false;
-            this.menu_about.Click += new System.EventHandler(this.menu_about_Click);
-            // 
             // btn_EachRepair
             // 
             this.btn_EachRepair.Location = new System.Drawing.Point(270, 344);
@@ -369,7 +346,6 @@
             this.Controls.Add(this.lab_SelectedAll);
             this.Controls.Add(this.lab_Invert);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.btn_Exchange);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.pgs_Detail);
@@ -383,7 +359,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_Fix);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
@@ -393,8 +368,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.xsD_ResultDisplay1)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -430,8 +403,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn tablenameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnnameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn datatypeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem menu_about;
         private System.Windows.Forms.Button btn_EachRepair;
     }
 }

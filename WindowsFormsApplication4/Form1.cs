@@ -67,77 +67,6 @@ namespace DataTool
         {
             FixIt(true);
         }
-        public void FixIt1()
-        {
-            //数据集不为空
-            if (this.xsD_ResultDisplay1.result.Rows.Count <= 0)
-            {
-                return;
-            }
-            //遍历数据集
-            //判断数据表是否存在
-            //如果存在修改 不存在创建   
-            int _progress = 0;
-            Stopwatch time = new Stopwatch();
-
-            this.toolScript_Progress.Visible = true;       //使进度条显示出来
-            this.toolStripStateInfor.Text = "事务执行中...";
-            this.toolScriptTime.Text = "";
-            Application.DoEvents();
-
-            time.Start();
-
-            //Application.DoEvents();
-
-            StringBuilder sqlCommand = new StringBuilder();
-            int RowCounts = this.xsD_ResultDisplay1.result.Rows.Count;
-            object tableName = "";
-            for (int i = 0; i < RowCounts; ++i)
-            {
-                bool alt = true;
-                bool exe = true;
-                if (Convert.ToBoolean(xsD_ResultDisplay1.result[i]["Choose"]))
-                {
-                    //如果当前表不存在,且程序未创建该表
-                    if (!Existsed(xsD_ResultDisplay1.result[i]["tablename"].ToString()) && !tableName.Equals(xsD_ResultDisplay1.result[i]["tablename"]))
-                    {
-                        tableName = xsD_ResultDisplay1.result[i]["tablename"];
-                        //sqlCommand.AppendFormat("use [{3}] ; create table [{0}] ( [{1}]  {2} )", dr[0], dr[1], dr[2], this.cmb_CurrentDatabase.Text);
-                        sqlCommand.AppendFormat("USE [{3}]; CREATE TABLE [{0}] ( [{1}]  {2} )", xsD_ResultDisplay1.result[i]["tablename"], xsD_ResultDisplay1.result[i]["columnname"], xsD_ResultDisplay1.result[i]["datatype"], this.cmb_CurrentDatabase.Text);
-                        alt = true;
-                    }
-                    else if (alt)
-                    {
-                        //sqlCommand.AppendFormat("use [{3}] ; alter table [{0}] add [{1}]  {2}", dr[0], dr[1], dr[2], this.cmb_CurrentDatabase.Text);
-                        sqlCommand.AppendFormat("USE [{3}]; ALTER TABLE [{0}] ADD [{1}]  {2}", xsD_ResultDisplay1.result[i]["tablename"], xsD_ResultDisplay1.result[i]["columnname"], xsD_ResultDisplay1.result[i]["datatype"], this.cmb_CurrentDatabase.Text);
-                        alt = false;
-                    }
-                    else
-                    {
-                        sqlCommand.AppendFormat(", [{0}] {1} ", xsD_ResultDisplay1.result[i]["columnname"], xsD_ResultDisplay1.result[i]["datatype"]);
-                    }
-
-
-                    sqlCommand.Remove(0, sqlCommand.Length);
-                    //++_progress;                    
-
-                    // this.pgs_Detail .Value =(++_progress);
-                    //this.toolScriptInfo.Text ="已修复"+ ((this.pgs_Detail.Value / _rowCount) * 100).ToString() + "%";
-                    this.toolScript_Progress.Value = (++_progress);         //更新进度信息                           
-                }
-
-            }
-
-            time.Stop();
-            if (_progress == _rowCount)
-            {
-                //MessageBox.Show("修复完成！");
-                this.toolStripStateInfor.Text = "就绪";
-                //this.toolScriptUser.Text = "修复完成"+_progress.ToString()+"条";                    
-                this.toolScriptTime.Text = time.Elapsed.ToString();      //将执行时间显示出来
-                this.toolScript_Progress.Visible = false;
-            }
-        }
 
         private int Execute(StringBuilder sql)
         {
@@ -186,33 +115,26 @@ namespace DataTool
                         tempName = dr["tablename"];
                         sw = true;
                         sqlCommand.Append("\r\n GO \r\n");
-                        //sqlCommand.AppendFormat("use [{3}] ; create table [{0}] ( [{1}]  {2} ) ;\r\n", dr[0], dr[1], dr[2], this.cmb_CurrentDatabase.Text);
                         sqlCommand.AppendFormat("CREATE TABLE [{0}] ( [{1}]  {2} )", dr["tablename"], dr["columnname"], dr["datatype"]);
                     }
                     else if (sw)
                     {
                         sqlCommand.Append("\r\n GO \r\n");
-                        //sqlCommand.AppendFormat("use [{3}] ; alter table [{0}] add [{1}]  {2} ;\r\n", dr[0], dr[1], dr[2], this.cmb_CurrentDatabase.Text);
                         sqlCommand.AppendFormat("ALTER TABLE [{0}] ADD [{1}]  {2} ", dr["tablename"], dr["columnname"], dr["datatype"]);
                         sw = false;
                     }
+                    else if (!dr["tablename"].Equals(tempName))  //如果当前字段不属于这个表则重新alter一下
+                    {
+
+                        sqlCommand.Append("\r\n GO \r\n");
+                        sqlCommand.AppendFormat("ALTER TABLE [{0}] ADD [{1}]  {2} ", dr["tablename"], dr["columnname"], dr["datatype"]);
+                        tempName = dr["tablename"].ToString().Trim();
+
+                    }
                     else
                     {
-                        if (!dr["tablename"].Equals(tempName))  //如果当前字段不属于这个表则重新alter一下
-                        {
-                            sqlCommand.Append("\r\n GO \r\n");
-                            sqlCommand.AppendFormat("ALTER TABLE [{0}] ADD [{1}]  {2} ", dr["tablename"], dr["columnname"], dr["datatype"]);
-                            tempName = dr["tablename"].ToString().Trim();
-                        }
-                        else
-                        {
-                            sqlCommand.AppendFormat(",[{0}]  {1} ", dr["columnname"], dr["datatype"]);
-                        }
+                        sqlCommand.AppendFormat(",[{0}]  {1} ", dr["columnname"], dr["datatype"]);
                     }
-                    //++_progress;                    
-
-                    // this.pgs_Detail .Value =(++_progress);
-                    //this.toolScriptInfo.Text ="已修复"+ ((this.pgs_Detail.Value / _rowCount) * 100).ToString() + "%";
                     toolScript_Progress.Value = (++_progress);         //更新进度信息                           
                 }
             }
@@ -230,9 +152,7 @@ namespace DataTool
             time.Stop();
             if (_progress == this.toolScript_Progress.Maximum)
             {
-                //MessageBox.Show("修复完成！");
                 this.toolStripStateInfor.Text = "就绪";
-                //this.toolScriptUser.Text = "修复完成"+_progress.ToString()+"条";                    
                 this.toolScriptTime.Text = time.Elapsed.ToString();      //将执行时间显示出来
                 this.toolScript_Progress.Visible = false;
             }
@@ -342,7 +262,6 @@ namespace DataTool
                 sqlBuilder.Append("    /* AND datatype != 'sysname';*/");
                 sqlBuilder.Append(" ");
                 sqlBuilder.Append(" SELECT * from #temp2  ");
-                //sqlBuilder.AppendFormat(" USE {0};", this.cmb_CurrentDatabase.Text);
                 using (SqlConnection conn = new SqlConnection(_myConnectionString))
                 {
                     conn.Open();
@@ -361,8 +280,6 @@ namespace DataTool
                 this.toolStripStateInfor.Text = "就绪";
                 this.toolScriptTime.Text = time1.Elapsed.ToString();       //将时间显示在状态栏
                 this.label4.Text = "共计 '" + _rowCount.ToString() + "' 条记录。";
-                // this.pgs_Detail.Maximum = _rowCount;
-                //this.toolScript_Progress.Maximum = _rowCount;        //本次查询的记录条数
             }
             catch (Exception ex)
             {
@@ -449,13 +366,6 @@ namespace DataTool
 
         }
 
-        private void dgv_ShowResult_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            //if (this.dgv_ShowResult.CurrentCell.ColumnIndex == this.dgv_ShowResult.Columns["Choose"].Index && e.Button == MouseButtons.Left)
-            //{
-            //    this.dgv_ShowResult.CurrentCell.Value = !Convert.ToBoolean(dgv_ShowResult.CurrentCell.Value);
-            //}
-        }
         public void FixIt()
         {
             //数据集不为空
@@ -487,12 +397,10 @@ namespace DataTool
                     {
                         if (!Existsed(dr["tablename"].ToString()))
                         {
-                            //sqlCommand.AppendFormat("use [{3}] ; create table [{0}] ( [{1}]  {2} )", dr[0], dr[1], dr[2], this.cmb_CurrentDatabase.Text);
                             sqlCommand.AppendFormat("USE [{3}]; CREATE TABLE [{0}] ( [{1}]  {2} )", dr["tablename"], dr["columnname"], dr["datatype"], this.cmb_CurrentDatabase.Text);
                         }
                         else
                         {
-                            //sqlCommand.AppendFormat("use [{3}] ; alter table [{0}] add [{1}]  {2}", dr[0], dr[1], dr[2], this.cmb_CurrentDatabase.Text);
                             sqlCommand.AppendFormat("USE [{3}]; ALTER TABLE [{0}] ADD [{1}]  {2}", dr["tablename"], dr["columnname"], dr["datatype"], this.cmb_CurrentDatabase.Text);
                         }
                         using (SqlCommand command = new SqlCommand(sqlCommand.ToString(), conn))
@@ -500,10 +408,6 @@ namespace DataTool
                             command.ExecuteNonQuery();
                         }
                         sqlCommand.Remove(0, sqlCommand.Length);
-                        //++_progress;                    
-
-                        // this.pgs_Detail .Value =(++_progress);
-                        //this.toolScriptInfo.Text ="已修复"+ ((this.pgs_Detail.Value / _rowCount) * 100).ToString() + "%";
                         this.toolScript_Progress.Value = (++_progress);         //更新进度信息                           
                     }
                 }
@@ -512,9 +416,7 @@ namespace DataTool
             time.Stop();
             if (_progress == this.toolScript_Progress.Maximum)
             {
-                //MessageBox.Show("修复完成！");
                 this.toolStripStateInfor.Text = "就绪";
-                //this.toolScriptUser.Text = "修复完成"+_progress.ToString()+"条";                    
                 this.toolScriptTime.Text = time.Elapsed.ToString();      //将执行时间显示出来
                 MessageBox.Show("修复完成!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.toolScript_Progress.Visible = false;
@@ -522,13 +424,6 @@ namespace DataTool
 
             btn_Seach.PerformClick();
         }
-
-        private void menu_about_Click(object sender, EventArgs e)
-        {
-            AboutBox1 about = new DataTool.AboutBox1();
-            about.ShowDialog();
-        }
-
         private void btn_EachRepair_Click(object sender, EventArgs e)
         {
             int count = GetSelectCount();

@@ -19,7 +19,6 @@ D:\VisusalStudioProjects\DataToy\WindowsFormsApplication4\WindowsFormsApplicatio
 D:\VisusalStudioProjects\DataToy\WindowsFormsApplication4\WindowsFormsApplication4\obj\Debug\DataTool.OutPutForm.resources
 D:\VisusalStudioProjects\DataToy\WindowsFormsApplication4\WindowsFormsApplication4\bin\Debug\DataToy.exe.manifest
 D:\VisusalStudioProjects\DataToy\WindowsFormsApplication4\WindowsFormsApplication4\bin\Debug\DataToy.application
-D:\VisusalStudioProjects\DataToy\WindowsFormsApplication4\WindowsFormsApplication4\obj\Debug\DataTool.AboutBox1.resources
 D:\VisusalStudioProjects\DataToy\WindowsFormsApplication4\WindowsFormsApplication4\obj\Debug\DataTool.LoadData.resources
 D:\VisusalStudioProjects\DataToy\WindowsFormsApplication4\WindowsFormsApplication4\obj\Debug\DataToy.TrustInfo.xml
 D:\VisusalStudioProjects\DataToy\WindowsFormsApplication4\WindowsFormsApplication4\obj\Debug\DataToy.exe.manifest
